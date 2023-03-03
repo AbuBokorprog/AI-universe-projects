@@ -72,15 +72,21 @@ const modalDataLoad = (data) => {
 };
 
 const modalShow = (data) => {
-  console.log(data.integrations[0]);
+  console.log(data.pricing[0].price);
   //modal flex-1
   const modalBody1 = document.getElementById("modal-flex-1");
   modalBody1.innerHTML = `
   <h5 class="px-4 py-3">${data.description}</h5>
   <div class="d-flex mb-3 justify-content-center px-4 text-center align-items-center gap-2">
-  <div class="card border-0 bg-primary-subtle py-3 px-2 w-50"><p>${data.pricing[0].price} <br>${data.pricing[0].plan}</p></div>
-  <div class="card border-0 bg-danger-subtle py-3 px-2 w-50"><p>${data.pricing[1].price}<br>${data.pricing[1].plan}</p></div>
-  <div class="card border-0 bg-warning-subtle py-1 px-2 w-50"><p>${data.pricing[2].price}<br>${data.pricing[2].plan}</p></div>
+  <div class="card border-0 bg-primary-subtle py-3 px-2 w-50"><p>${
+    data.pricing[0].price ? data.pricing[0].price : "Free of cost"
+  } <br>${data.pricing[0].plan}</p></div>
+  <div class="card border-0 bg-danger-subtle py-3 px-2 w-50"><p>${
+    data.pricing[1].price ? data.pricing[1].price : "Free of cost"
+  }<br>${data.pricing[1].plan}</p></div>
+  <div class="card border-0 bg-warning-subtle py-1 px-2 w-50"><p>${
+    data.pricing[2].price ? data.pricing[2].price : "Free of cost"
+  }<br>${data.pricing[2].plan}</p></div>
   </div>
   <div class="d-flex mb-3 mx-auto justify-content-center px-4 align-items-center gap-5">
   <div class="w-50"><h5>Feature</h5>
@@ -95,6 +101,7 @@ const modalShow = (data) => {
   <li>${data.integrations[0]}</li>
   <li>${data.integrations[1]}</li>
   <li>${data.integrations[2]}</li>
+  <li>${data.integrations[3]}</li>
   </ul>
   </div>
   </div>
@@ -102,12 +109,11 @@ const modalShow = (data) => {
 
   //modal-flex-2
   const modalBody2 = document.getElementById("modal-flex-2");
-
+  const score = data.accuracy.score * 100;
+  //console.log(score);
   modalBody2.innerHTML = `
    <img class="img-fluid p-2 rounded-4" src="${data.image_link[0]}">
-   <p class="bg-danger px-1 position-absolute start-50 mx-5 rounded-3">${
-     data.accuracy.score ? data.accuracy.score : ""
-   }% Accuracy</p>
+   <p id="accuracy" class="bg-danger px-1 position-absolute start-50 mx-5 rounded-3 d-none">${score}% Accuracy</p>
     <p class="mx-auto" >${
       data.input_output_examples[0].input
         ? data.input_output_examples[0].input
@@ -117,8 +123,12 @@ const modalShow = (data) => {
       ? data.input_output_examples[1].input
       : "no data"
   }</p>
-
   `;
+  if (score) {
+    document.getElementById("accuracy").classList.remove("d-none");
+  } else {
+    document.getElementById("accuracy").classList.add("d-none");
+  }
 };
 
 loadData(6);
