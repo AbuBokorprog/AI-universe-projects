@@ -78,19 +78,19 @@ const modalShow = (data) => {
   modalBody1.innerHTML = `
   <h5 class="px-4 py-3">${data.description}</h5>
   <div class="d-flex mb-3 justify-content-center px-4 text-center align-items-center gap-2">
-  <div class="card border-0 bg-primary py-3 px-2 w-50"><p>${data.pricing[0].price} <br>${data.pricing[0].plan}</p></div>
-  <div class="card border-0 bg-primary py-3 px-2 w-50"><p>${data.pricing[1].price}<br>${data.pricing[1].plan}</p></div>
-  <div class="card border-0 bg-primary py-1 px-2 w-50"><p>${data.pricing[2].price}<br>${data.pricing[2].plan}</p></div>
+  <div class="card border-0 bg-primary-subtle py-3 px-2 w-50"><p>${data.pricing[0].price} <br>${data.pricing[0].plan}</p></div>
+  <div class="card border-0 bg-danger-subtle py-3 px-2 w-50"><p>${data.pricing[1].price}<br>${data.pricing[1].plan}</p></div>
+  <div class="card border-0 bg-warning-subtle py-1 px-2 w-50"><p>${data.pricing[2].price}<br>${data.pricing[2].plan}</p></div>
   </div>
-  <div class="d-flex mb-3 justify-content-center px-4 align-items-center gap-5">
-  <div class="w-50"><h3>Feature</h3>
+  <div class="d-flex mb-3 mx-auto justify-content-center px-4 align-items-center gap-5">
+  <div class="w-50"><h5>Feature</h5>
   <ul class="text-center">
   <li>${data.features[1].feature_name}</li>
   <li>${data.features[2].feature_name}</li>
   <li>${data.features[3].feature_name}</li>
   </ul>
   </div>
-  <div class="w-50"><h3>Integrations</h3>
+  <div class="w-50"><h5>Integrations</h5>
   <ul>
   <li>${data.integrations[0]}</li>
   <li>${data.integrations[1]}</li>
