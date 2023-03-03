@@ -21,7 +21,7 @@ const displayCard = (data, limit) => {
   }
 
   data.forEach((card) => {
-    console.log(card);
+    //console.log(card);
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
@@ -68,7 +68,38 @@ const modalDataLoad = (data) => {
   //console.log(url);
   fetch(url)
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => modalShow(data.data));
+};
+
+const modalShow = (data) => {
+  console.log(data.accuracy.score);
+  const modalBody1 = document.getElementById("modal-flex-1");
+  modalBody1.innerHTML = `
+  <p>${data.description}</P>
+  <div class="d-flex justify-content-center align-items-center gap-2">
+
+  </div>
+  `;
+
+  //modal-flex-2
+  const modalBody2 = document.getElementById("modal-flex-2");
+
+  modalBody2.innerHTML = `
+   <img class="img-fluid p-2 rounded-4" src="${data.image_link[0]}">
+   <p class="bg-danger px-1 position-absolute start-50 mx-5 rounded-3">${
+     data.accuracy.score ? data.accuracy.score : ""
+   }% Accuracy</p>
+    <p class="mx-auto" >${
+      data.input_output_examples[0].input
+        ? data.input_output_examples[0].input
+        : "no data"
+    } <br> ${
+    data.input_output_examples[1].input
+      ? data.input_output_examples[1].input
+      : "no data"
+  }</p>
+
+  `;
 };
 
 loadData(6);

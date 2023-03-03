@@ -52,13 +52,13 @@
       <section>
         <!-- Modal -->
         <div
-          class="modal fade"
+          class="modal fade w-100"
           id="detailsModal"
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-dialog modal-xl modal-dialog-centered w-100">
             <div class="modal-content">
               <div class="text-end">
                 <button
@@ -68,9 +68,16 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body d-flex justify-content-center gap-5">
-                <div id="modal-flex-1"></div>
-                <div id="modal-flex-2"></div>
+              <div
+                class="modal-body d-flex justify-content-center align-items-center gap-4"
+              >
+                <div
+                  id="modal-flex-1"
+                  class="w-100 h-100 border-5 border-dark-subtle mb-4 card bg-info-subtle"
+                ></div>
+                <div id="modal-flex-2" class="w-100 h-100 card mb-4">
+                  <!-- <div id="image"></div> -->
+                </div>
               </div>
             </div>
           </div>
