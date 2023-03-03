@@ -9,40 +9,35 @@ const displayCard = (data) => {
   //console.log(data);
   const cardContainer = document.getElementById("card-container");
   data.forEach((card) => {
-    //console.log(card);
-    /* card.features.forEach((list) => {
-      console.log(list);
-    }); */
+    console.log(card);
+
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
     <div class="card h-100">
     <img src="${card.image}" class="card-img-top rounded-5 p-3" alt="" />
     <div class="card-body">
-      <h5 id="feature" class="card-title">Features</h5>
+      <h5 class="card-title">Features</h5>
+      <ol id="ol-container">
+        <li>${card.features[0]}</li>
+        <li>${card.features[1]}</li>
+        <li>${card.features[2] ? card.features[2] : "no data"}}</li>
+        <li>${card.features[3] ? card.features[3] : "no data"}</li>
+      </ol>
     </div>
     <div class="card-footer">
       <h5>${card.name}</h5>
-      <small class="text-muted"><i class="fa-regular fa-calendar"></i>${card.published_in}</small>
-      <button><i class="fa-sharp fa-solid fa-arrow-right text-right"></i></button>
+      <div class="d-flex justify-content-between">
+      <small class="text-muted me-2"><span><i class="fa-regular fa-calendar"></span></i>${
+        card.published_in
+      }</small>
+      <button class="border-0 px-3 py-2 rounded-5"> <span><i class="fa-sharp fa-solid fa-arrow-right text-right"></i></span> </button>
+      </div>
     </div>
   </div>
     `;
     cardContainer.appendChild(div);
   });
-  /* const feature = document.getElementById("feature");
-  //const ol = document.createElement("ol");
-  data.forEach((card) => {
-    //console.log(card);
-    card.features.forEach((list) => {
-      console.log(list);
-      feature.innerHTML = `
-      <ol>
-      <li>${list}</li>
-      </ol>
-      `;
-    });
-  }); */
 };
 
 loadData();
