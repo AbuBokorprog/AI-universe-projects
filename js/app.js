@@ -72,12 +72,31 @@ const modalDataLoad = (data) => {
 };
 
 const modalShow = (data) => {
-  console.log(data.accuracy.score);
+  console.log(data.integrations[0]);
+  //modal flex-1
   const modalBody1 = document.getElementById("modal-flex-1");
   modalBody1.innerHTML = `
-  <p>${data.description}</P>
-  <div class="d-flex justify-content-center align-items-center gap-2">
-
+  <h5 class="px-4 py-3">${data.description}</h5>
+  <div class="d-flex mb-3 justify-content-center px-4 text-center align-items-center gap-2">
+  <div class="card border-0 bg-primary py-3 px-2 w-50"><p>${data.pricing[0].price} <br>${data.pricing[0].plan}</p></div>
+  <div class="card border-0 bg-primary py-3 px-2 w-50"><p>${data.pricing[1].price}<br>${data.pricing[1].plan}</p></div>
+  <div class="card border-0 bg-primary py-1 px-2 w-50"><p>${data.pricing[2].price}<br>${data.pricing[2].plan}</p></div>
+  </div>
+  <div class="d-flex mb-3 justify-content-center px-4 align-items-center gap-5">
+  <div class="w-50"><h3>Feature</h3>
+  <ul class="text-center">
+  <li>${data.features[1].feature_name}</li>
+  <li>${data.features[2].feature_name}</li>
+  <li>${data.features[3].feature_name}</li>
+  </ul>
+  </div>
+  <div class="w-50"><h3>Integrations</h3>
+  <ul>
+  <li>${data.integrations[0]}</li>
+  <li>${data.integrations[1]}</li>
+  <li>${data.integrations[2]}</li>
+  </ul>
+  </div>
   </div>
   `;
 
