@@ -7,7 +7,7 @@ const loadData = (limit) => {
     });
   document.getElementById("loader").classList.remove("d-none");
 };
-
+// display card
 const displayCard = (data, limit) => {
   //console.log(data);
   document.getElementById("loader").classList.add("d-none");
@@ -21,8 +21,6 @@ const displayCard = (data, limit) => {
   }
 
   data.forEach((card) => {
-    //console.log(card);
-
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
@@ -43,7 +41,7 @@ const displayCard = (data, limit) => {
       <small class="text-muted me-2"><span><i class="fa-regular fa-calendar"></span></i>${
         card.published_in
       }</small>
-      <button class="border-0 px-3 py-2 text-danger rounded-5"> <span><i class="fa-sharp fa-solid fa-arrow-right text-right"></i></span> </button>
+      <button type="button" class="border-0 px-3 py-2 text-danger rounded-5" data-bs-toggle="modal" data-bs-target="#detailsModal"><i class="fa-sharp fa-solid fa-arrow-right text-right"></i></button>
       </div>
     </div>
   </div>
@@ -59,5 +57,7 @@ const loadingAll = (limit) => {
 document.getElementById("see-more").addEventListener("click", function () {
   loadingAll();
 });
+
+// modal
 
 loadData(6);
