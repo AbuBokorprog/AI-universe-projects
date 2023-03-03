@@ -21,6 +21,7 @@ const displayCard = (data, limit) => {
   }
 
   data.forEach((card) => {
+    console.log(card);
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
@@ -41,7 +42,9 @@ const displayCard = (data, limit) => {
       <small class="text-muted me-2"><span><i class="fa-regular fa-calendar"></span></i>${
         card.published_in
       }</small>
-      <button type="button" class="border-0 px-3 py-2 text-danger rounded-5" data-bs-toggle="modal" data-bs-target="#detailsModal"><i class="fa-sharp fa-solid fa-arrow-right text-right"></i></button>
+      <button type="button" class="border-0 px-3 py-2 text-danger rounded-5" data-bs-toggle="modal" data-bs-target="#detailsModal" onclick="modalDataLoad('${
+        card.id
+      }')"><i class="fa-sharp fa-solid fa-arrow-right text-right"></i></button>
       </div>
     </div>
   </div>
@@ -59,5 +62,13 @@ document.getElementById("see-more").addEventListener("click", function () {
 });
 
 // modal
+const modalDataLoad = (data) => {
+  //console.log(data);
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${data}`;
+  //console.log(url);
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+};
 
 loadData(6);
