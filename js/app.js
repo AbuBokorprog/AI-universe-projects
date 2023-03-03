@@ -3,10 +3,12 @@ const loadData = () => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayCard(data.data.tools));
+  document.getElementById("loader").classList.remove("d-none");
 };
 
 const displayCard = (data) => {
   //console.log(data);
+  document.getElementById("loader").classList.add("d-none");
   const cardContainer = document.getElementById("card-container");
   data.forEach((card) => {
     console.log(card);
@@ -21,7 +23,7 @@ const displayCard = (data) => {
       <ol id="ol-container">
         <li>${card.features[0]}</li>
         <li>${card.features[1]}</li>
-        <li>${card.features[2] ? card.features[2] : "no data"}}</li>
+        <li>${card.features[2] ? card.features[2] : "no data"}</li>
         <li>${card.features[3] ? card.features[3] : "no data"}</li>
       </ol>
     </div>
@@ -31,7 +33,7 @@ const displayCard = (data) => {
       <small class="text-muted me-2"><span><i class="fa-regular fa-calendar"></span></i>${
         card.published_in
       }</small>
-      <button class="border-0 px-3 py-2 rounded-5"> <span><i class="fa-sharp fa-solid fa-arrow-right text-right"></i></span> </button>
+      <button class="border-0 px-3 py-2 text-danger rounded-5"> <span><i class="fa-sharp fa-solid fa-arrow-right text-right"></i></span> </button>
       </div>
     </div>
   </div>
