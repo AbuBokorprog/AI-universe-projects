@@ -133,6 +133,9 @@ const modalShow = (data) => {
   if (priceText == "/") {
     document.getElementById("price2").innerText = "Free Of Cost/Free";
     document.getElementById("price2").classList.add("py-4");
+  } else if (priceText == "No cost/Free") {
+    document.getElementById("price2").innerText = "Free Of Cost/Basic";
+    document.getElementById("price2").classList.add("py-4");
   }
   // price Enterprise
   const price3Index = document.getElementById("price2");
@@ -167,15 +170,4 @@ const modalShow = (data) => {
   }
 };
 
-const sorting = (a, b) => {
-  const dateA = new Date(a.published_in);
-  const dateB = new Date(b.published_in);
-  if (dateA > dateB) {
-    return 1;
-  } else if (dateA < dateB) {
-    return -1;
-  } else {
-    return 0;
-  }
-};
 loadData(6);
