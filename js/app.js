@@ -1,13 +1,14 @@
-const loadData = (limit) => {
+const loadData = (limit, sortData) => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      displayCard(data.data.tools, limit);
+      displayCard(data.data.tools, limit, sortData);
     });
   document.getElementById("loader").classList.remove("d-none");
 };
 // display card
+//console.log(arr);
 const displayCard = (data, limit) => {
   //console.log(data);
   document.getElementById("loader").classList.add("d-none");
@@ -19,9 +20,13 @@ const displayCard = (data, limit) => {
   } else {
     document.getElementById("see-more").classList.add("d-none");
   }
-
+  const arr = [];
+  //console.log(arr);
   data.forEach((card) => {
     //console.log(card);
+    const dates = card.published_in;
+    arr.push(dates);
+
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
@@ -32,8 +37,12 @@ const displayCard = (data, limit) => {
       <ol id="ol-container">
         <li>${card.features[0]}</li>
         <li>${card.features[1]}</li>
-        <li>${card.features[2] ? card.features[2] : "No data"}</li>
-        <li>${card.features[3] ? card.features[3] : "No data"}</li>
+        <li class="" id="list3">${
+          card.features[2] ? card.features[2] : "No data"
+        }</li>
+        <li class="" id="list4">${
+          card.features[3] ? card.features[3] : "No data"
+        }</li>
       </ol>
     </div>
     <div class="card-footer">
@@ -50,17 +59,43 @@ const displayCard = (data, limit) => {
   </div>
     `;
     cardContainer.appendChild(div);
+    /* const list = document.getElementById("list3");
+    const listText = list.innerText;
+    console.log(listText);
+    if (listText == "No data") {
+      document.getElementById("list3").classList.add("d-none");
+    } else {
+      document.getElementById("list3").classList.remove("d-none");
+    }
+    const list2 = document.getElementById("list4");
+    const list2Text = list2.innerText;
+    console.log(list2Text);
+    if (listText == "No data") {
+      document.getElementById("list3").classList.add("d-none");
+    } else if (listText == "No data") {
+      document.getElementById("list3").classList.remove("d-none");
+    } */
   });
+  arr.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
+  sortData(arr);
+  //return arr;
 };
-
+// show all
 const loadingAll = (limit) => {
   loadData(limit);
 };
-
 document.getElementById("see-more").addEventListener("click", function () {
   loadingAll();
 });
-
+//sort
+const sortData = (sort) => {
+  console.log(sort);
+  //sortData();
+};
+document.getElementById("sort-btn").addEventListener("click", function () {
+  console.log("hello");
+  //sortData();
+});
 // modal
 const modalDataLoad = (data) => {
   //console.log(data);
@@ -157,7 +192,9 @@ const modalShow = (data) => {
    }">
    <p id="accuracy" class="bg-danger px-1 position-absolute start-50 mx-5 rounded-3 d-none">${score}% Accuracy</p>
     <p class="mx-auto" >${
-      data.input_output_examples ? data.input_output_examples[0].input : ""
+      data.input_output_examples
+        ? data.input_output_examples[0].input
+        : "No Data Found"
     } <br> ${
     data.input_output_examples ? data.input_output_examples[1].input : ""
   }</p>
