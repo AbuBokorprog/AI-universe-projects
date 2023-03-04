@@ -72,21 +72,22 @@ const modalDataLoad = (data) => {
 };
 
 const modalShow = (data) => {
-  console.log(data.features);
+  console.log(data);
+  console.log(data.pricing);
   //modal flex-1
   const modalBody1 = document.getElementById("modal-flex-1");
   modalBody1.innerHTML = `
   <h5 class="px-4 py-2">${data.description}</h5>
   <div class="d-flex my-3 justify-content-center px-4 text-center align-items-center gap-2">
   <div class="card border-0 bg-primary-subtle py-3 h-50 px-2 w-50"><p>${
-    data.pricing[0].price ? data.pricing[0].price : "Free of cost"
-  }<br>/${data.pricing[0].plan}</p></div>
+    data.pricing ? data.pricing[0].price : ""
+  }<br>/${data.pricing ? data.pricing[0].plan : ""}</p></div>
   <div class="card border-0 bg-danger-subtle py-3 h-50 px-2 w-50"><p>${
-    data.pricing[1].price ? data.pricing[1].price : "Free of cost"
-  }<br>/${data.pricing[1].plan}</p></div>
+    data.pricing ? data.pricing[1].price : ""
+  }<br>/${data.pricing ? data.pricing[1].plan : ""}</p></div>
   <div class="card border-0 bg-warning-subtle py-1 h-50 px-2 w-50"><p>${
-    data.pricing[2].price ? data.pricing[2].price : "Free of cost"
-  }<br>/${data.pricing[2].plan}</p></div>
+    data.pricing ? data.pricing[1].price : ""
+  }<br>/${data.pricing ? data.pricing[1].plan : ""}</p></div>
   </div>
   <div class="d-flex mb-2 mx-auto justify-content-center px-4 align-items-center gap-5">
   <div class="w-50"><h5>Feature</h5>
@@ -98,10 +99,10 @@ const modalShow = (data) => {
   </div>
   <div class="w-50"><h5>Integrations</h5>
   <ul>
-  <li>${data.integrations[0] ? data.integrations[0] : "No Data Found"}</li>
-  <li>${data.integrations[1] ? data.integrations[1] : "No Data Found"}</li>
-  <li>${data.integrations[2] ? data.integrations[2] : "No Data Found"}</li>
-  <li>${data.integrations[3] ? data.integrations[3] : "No Data Found"}</li>
+  <li>${data.integrations ? data.integrations[0] : ""}</li>
+  <li>${data.integrations ? data.integrations[1] : ""}</li>
+  <li>${data.integrations ? data.integrations[2] : ""}</li>
+  <li>${data.integrations ? data.integrations[3] : ""}</li>
   </ul>
   </div>
   </div>
@@ -112,16 +113,16 @@ const modalShow = (data) => {
   const score = data.accuracy.score * 100;
   //console.log(score);
   modalBody2.innerHTML = `
-   <img class="img-fluid p-3 rounded-5" src="${data.image_link[0]}">
-   <p id="accuracy" class="bg-danger px-1 position-absolute start-50 mx-5 rounded-3 d-none">${score}% Accuracy</p>
+   <img class="img-fluid p-3 rounded-5" src="${
+     data.image_link ? data.image_link[0] : ""
+   }">
+   <p id="accuracy" class="bg-danger px-1 position-absolute start-50 mx-5 rounded-3 d-none">${
+     data.accuracy.score ? data.accuracy.score : ""
+   }% Accuracy</p>
     <p class="mx-auto" >${
-      data.input_output_examples[0].input
-        ? data.input_output_examples[0].input
-        : "no data"
+      data.input_output_examples ? data.input_output_examples[0].input : ""
     } <br> ${
-    data.input_output_examples[1].input
-      ? data.input_output_examples[1].input
-      : "no data"
+    data.input_output_examples ? data.input_output_examples[1].input : ""
   }</p>
   `;
   if (score) {
