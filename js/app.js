@@ -1,14 +1,13 @@
-const loadData = (limit, sortData) => {
+const loadData = (limit, sortedDates) => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      displayCard(data.data.tools, limit, sortData);
+      displayCard(data.data.tools, limit, sortedDates);
     });
   document.getElementById("loader").classList.remove("d-none");
 };
 // display card
-//console.log(arr);
 const displayCard = (data, limit) => {
   //console.log(data);
   document.getElementById("loader").classList.add("d-none");
@@ -23,10 +22,9 @@ const displayCard = (data, limit) => {
   const arr = [];
   //console.log(arr);
   data.forEach((card) => {
-    //console.log(card);
+    //console.log(card.features);
     const dates = card.published_in;
     arr.push(dates);
-
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
@@ -37,12 +35,8 @@ const displayCard = (data, limit) => {
       <ol id="ol-container">
         <li>${card.features[0]}</li>
         <li>${card.features[1]}</li>
-        <li class="" id="list3">${
-          card.features[2] ? card.features[2] : "No data"
-        }</li>
-        <li class="" id="list4">${
-          card.features[3] ? card.features[3] : "No data"
-        }</li>
+        <li>${card.features[2] ? card.features[2] : "No Found"}</li>
+        <li>${card.features[3] ? card.features[3] : "No Found"}</li>
       </ol>
     </div>
     <div class="card-footer">
@@ -59,26 +53,7 @@ const displayCard = (data, limit) => {
   </div>
     `;
     cardContainer.appendChild(div);
-    /* const list = document.getElementById("list3");
-    const listText = list.innerText;
-    console.log(listText);
-    if (listText == "No data") {
-      document.getElementById("list3").classList.add("d-none");
-    } else {
-      document.getElementById("list3").classList.remove("d-none");
-    }
-    const list2 = document.getElementById("list4");
-    const list2Text = list2.innerText;
-    console.log(list2Text);
-    if (listText == "No data") {
-      document.getElementById("list3").classList.add("d-none");
-    } else if (listText == "No data") {
-      document.getElementById("list3").classList.remove("d-none");
-    } */
   });
-  arr.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
-  sortData(arr);
-  //return arr;
 };
 // show all
 const loadingAll = (limit) => {
@@ -88,13 +63,8 @@ document.getElementById("see-more").addEventListener("click", function () {
   loadingAll();
 });
 //sort
-const sortData = (sort) => {
-  console.log(sort);
-  //sortData();
-};
 document.getElementById("sort-btn").addEventListener("click", function () {
-  console.log("hello");
-  //sortData();
+  //sortedDates();
 });
 // modal
 const modalDataLoad = (data) => {
@@ -107,7 +77,6 @@ const modalDataLoad = (data) => {
 };
 
 const modalShow = (data) => {
-  console.log(data);
   //console.log(data.pricing);
   //modal flex-1
   const modalBody1 = document.getElementById("modal-flex-1");
@@ -143,14 +112,6 @@ const modalShow = (data) => {
   </div>
   </div>
   `;
-  /* const ul = document.getElementById("Integrations-ul");
-  const ulList = ul.innerText;
-  console.log(ulList);
-  if (ulList == "") {
-    document.getElementById("Integrations-no").classList.remove("d-none");
-    document.getElementById("Integrations-ul").classList.add("d-none");
-  } */
-
   //price Basic
   const priceIndex = document.getElementById("price");
   const priceText = priceIndex.innerText;
@@ -194,7 +155,7 @@ const modalShow = (data) => {
     <p class="mx-auto" >${
       data.input_output_examples
         ? data.input_output_examples[0].input
-        : "No Data Found"
+        : "No! Not yet! take a break."
     } <br> ${
     data.input_output_examples ? data.input_output_examples[1].input : ""
   }</p>
@@ -206,4 +167,15 @@ const modalShow = (data) => {
   }
 };
 
+const sorting = (a, b) => {
+  const dateA = new Date(a.published_in);
+  const dateB = new Date(b.published_in);
+  if (dateA > dateB) {
+    return 1;
+  } else if (dateA < dateB) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
 loadData(6);
