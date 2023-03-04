@@ -117,32 +117,32 @@ const modalShow = (data) => {
   const priceText = priceIndex.innerText;
   //console.log(priceText);
   if (priceText == "/") {
-    document.getElementById("price").innerText = "Free Of Cost/Free";
+    document.getElementById("price").innerText = "Free Of Cost";
     document.getElementById("price").classList.add("py-4");
   } else if (priceText == "0/Basic") {
-    document.getElementById("price").innerText = "Free Of Cost/Basic";
+    document.getElementById("price").innerText = "Free Of Cost";
     document.getElementById("price").classList.add("py-4");
   } else if (priceText == "No cost/Free") {
-    document.getElementById("price").innerText = "Free Of Cost/Basic";
+    document.getElementById("price").innerText = "Free Of Cost";
     document.getElementById("price").classList.add("py-4");
   }
   // price Professional
   const price2Index = document.getElementById("price2");
   const price2Text = price2Index.innerText;
   //console.log(price2Text);
-  if (priceText == "/") {
-    document.getElementById("price2").innerText = "Free Of Cost/Free";
+  if (price2Text == "/") {
+    document.getElementById("price2").innerText = "Free Of Cost";
     document.getElementById("price2").classList.add("py-4");
-  } else if (priceText == "No cost/Free") {
-    document.getElementById("price2").innerText = "Free Of Cost/Basic";
+  } else if (price2Text == "No cost/Pro") {
+    document.getElementById("price2").innerText = "Free Of Cost";
     document.getElementById("price2").classList.add("py-4");
   }
   // price Enterprise
-  const price3Index = document.getElementById("price2");
+  const price3Index = document.getElementById("price3");
   const price3Text = price3Index.innerText;
   //console.log(price3Text);
-  if (priceText == "/") {
-    document.getElementById("price3").innerText = "Free Of Cost/Free";
+  if (price3Text == "/") {
+    document.getElementById("price3").innerText = "Free Of Cost";
     document.getElementById("price3").classList.add("py-4");
   }
 
