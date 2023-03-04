@@ -32,8 +32,8 @@ const displayCard = (data, limit) => {
       <ol id="ol-container">
         <li>${card.features[0]}</li>
         <li>${card.features[1]}</li>
-        <li>${card.features[2] ? card.features[2] : "no data"}</li>
-        <li>${card.features[3] ? card.features[3] : "no data"}</li>
+        <li>${card.features[2] ? card.features[2] : "No data"}</li>
+        <li>${card.features[3] ? card.features[3] : "No data"}</li>
       </ol>
     </div>
     <div class="card-footer">
@@ -73,40 +73,79 @@ const modalDataLoad = (data) => {
 
 const modalShow = (data) => {
   console.log(data);
-  console.log(data.pricing);
+  //console.log(data.pricing);
   //modal flex-1
   const modalBody1 = document.getElementById("modal-flex-1");
   modalBody1.innerHTML = `
   <h5 class="px-4 py-2">${data.description}</h5>
   <div class="d-flex my-3 justify-content-center px-4 text-center align-items-center gap-2">
-  <div class="card border-0 bg-primary-subtle py-3 h-50 px-2 w-50"><p>${
+  <div class="card border-0 bg-primary-subtle h-75 px-2 w-50" id="price"><p>${
     data.pricing ? data.pricing[0].price : ""
   }<br>/${data.pricing ? data.pricing[0].plan : ""}</p></div>
-  <div class="card border-0 bg-danger-subtle py-3 h-50 px-2 w-50"><p>${
+  <div class="card border-0 bg-danger-subtle h-75 px-2 w-50" id="price2"><p>${
     data.pricing ? data.pricing[1].price : ""
   }<br>/${data.pricing ? data.pricing[1].plan : ""}</p></div>
-  <div class="card border-0 bg-warning-subtle py-1 h-50 px-2 w-50"><p>${
-    data.pricing ? data.pricing[1].price : ""
-  }<br>/${data.pricing ? data.pricing[1].plan : ""}</p></div>
+  <div class="card border-0 bg-warning-subtle h-75 px-2 w-50" id="price3"><p>${
+    data.pricing ? data.pricing[2].price : ""
+  }<br>/${data.pricing ? data.pricing[2].plan : ""}</p></div>
   </div>
   <div class="d-flex mb-2 mx-auto justify-content-center px-4 align-items-center gap-5">
-  <div class="w-50"><h5>Feature</h5>
+  <div class="w-50 h-50"><h5>Feature</h5>
   <ul class="text-center">
   <li>${data.features[1].feature_name}</li>
   <li>${data.features[2].feature_name}</li>
   <li>${data.features[3].feature_name}</li>
   </ul>
   </div>
-  <div class="w-50"><h5>Integrations</h5>
-  <ul>
-  <li>${data.integrations ? data.integrations[0] : ""}</li>
-  <li>${data.integrations ? data.integrations[1] : ""}</li>
-  <li>${data.integrations ? data.integrations[2] : ""}</li>
-  <li>${data.integrations ? data.integrations[3] : ""}</li>
+  <div class="w-50 h-50"><h5>Integrations</h5>
+  <p class="d-none" id="Integrations-no">No Data Found</p>
+  <ul class="" id="Integrations-ul">
+  <li>${data.integrations ? data.integrations[0] : "No Data Found"}</li>
+  <li>${data.integrations ? data.integrations[1] : "No Data Found"}</li>
+  <li>${data.integrations ? data.integrations[2] : "No Data Found"}</li>
+  <li>${data.integrations ? data.integrations[3] : "No Data Found"}</li>
   </ul>
   </div>
   </div>
   `;
+  /* const ul = document.getElementById("Integrations-ul");
+  const ulList = ul.innerText;
+  console.log(ulList);
+  if (ulList == "") {
+    document.getElementById("Integrations-no").classList.remove("d-none");
+    document.getElementById("Integrations-ul").classList.add("d-none");
+  } */
+
+  //price Basic
+  const priceIndex = document.getElementById("price");
+  const priceText = priceIndex.innerText;
+  //console.log(priceText);
+  if (priceText == "/") {
+    document.getElementById("price").innerText = "Free Of Cost/Free";
+    document.getElementById("price").classList.add("py-4");
+  } else if (priceText == "0/Basic") {
+    document.getElementById("price").innerText = "Free Of Cost/Basic";
+    document.getElementById("price").classList.add("py-4");
+  } else if (priceText == "No cost/Free") {
+    document.getElementById("price").innerText = "Free Of Cost/Basic";
+    document.getElementById("price").classList.add("py-4");
+  }
+  // price Professional
+  const price2Index = document.getElementById("price2");
+  const price2Text = price2Index.innerText;
+  //console.log(price2Text);
+  if (priceText == "/") {
+    document.getElementById("price2").innerText = "Free Of Cost/Free";
+    document.getElementById("price2").classList.add("py-4");
+  }
+  // price Enterprise
+  const price3Index = document.getElementById("price2");
+  const price3Text = price3Index.innerText;
+  //console.log(price3Text);
+  if (priceText == "/") {
+    document.getElementById("price3").innerText = "Free Of Cost/Free";
+    document.getElementById("price3").classList.add("py-4");
+  }
 
   //modal-flex-2
   const modalBody2 = document.getElementById("modal-flex-2");
@@ -116,9 +155,7 @@ const modalShow = (data) => {
    <img class="img-fluid p-3 rounded-5" src="${
      data.image_link ? data.image_link[0] : ""
    }">
-   <p id="accuracy" class="bg-danger px-1 position-absolute start-50 mx-5 rounded-3 d-none">${
-     data.accuracy.score ? data.accuracy.score : ""
-   }% Accuracy</p>
+   <p id="accuracy" class="bg-danger px-1 position-absolute start-50 mx-5 rounded-3 d-none">${score}% Accuracy</p>
     <p class="mx-auto" >${
       data.input_output_examples ? data.input_output_examples[0].input : ""
     } <br> ${
